@@ -1,7 +1,8 @@
 from django.contrib.auth.models import User
-from users import models
+
 from cart import models
 from food.tests.test_foodBase import FoodTestBase
+
 
 class CartTestBase(FoodTestBase):
     def setUp(self) -> None:

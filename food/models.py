@@ -10,7 +10,7 @@ class Category(models.Model):
         return self.name    
 
 class Food(models.Model):
-    title = models.CharField(max_length=65)
+    title = models.CharField(max_length=65, unique=True)
     cover = models.ImageField(upload_to='food/covers/%Y/%m/%d/', null=True, default=None)
     description = models.CharField(max_length=65)
     slug = models.SlugField(unique=True, blank=True)
@@ -18,12 +18,16 @@ class Food(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="category", default=None)
     is_discount = models.BooleanField(default=False)
     discount_perc = models.IntegerField(null=True, blank=True)
+    price_discount = models.FloatField(null=True, blank=True)
 
     def __str__(self):
         return self.title
 
-    @property
-    def get_price_discount(self):
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            slug = f'{slugify(self.title)}'
+            self.slug = slug
+
         if self.is_discount:
             price = self.price
             discount_perc = self.discount_perc
@@ -31,11 +35,6 @@ class Food(models.Model):
 
             total = (price*percent)
 
-            return total
-
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            slug = f'{slugify(self.title)}'
-            self.slug = slug
+            self.price_discount = total
 
         return super().save(*args, **kwargs)
