@@ -19,7 +19,7 @@ class FoodTestBase(TestCase):
         password='123456',
         email='userclient@email.com',
     ):
-        client = User.objects.create_user(
+        cliente = User.objects.create_user(
             first_name=first_name,
             last_name=last_name,
             username=username,
@@ -27,7 +27,9 @@ class FoodTestBase(TestCase):
             email=email,
         )
 
-        return client
+        cliente.save()
+
+        return cliente
 
     def make_user_gerente(
         self,
@@ -37,7 +39,6 @@ class FoodTestBase(TestCase):
         password='123456',
         email='usergerente@email.com',
     ):
-
         gerente = User.objects.create_user(
             first_name=first_name,
             last_name=last_name,

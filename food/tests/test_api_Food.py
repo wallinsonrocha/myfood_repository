@@ -3,9 +3,6 @@ from unittest.mock import patch
 from django.urls import reverse
 from .test_foodBase import FoodTestBase
 
-from food.models import Category
-
-
 class FoodAPIMixin(FoodTestBase):
     def get_url_list(self, parametre='food:food-api-list'):
         rv = reverse(parametre)

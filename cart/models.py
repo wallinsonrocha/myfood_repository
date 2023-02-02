@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from food.models import Food
-from users.models import UserFood
+
 
 # Create your models here.
 
@@ -13,16 +13,20 @@ class Cart(models.Model):
     def __str__(self):
         return f'{self.food} {self.quantity}x'
 
-    def save(self, *args, **kwargs):
+    @property
+    def get_total_price(self):
         total = 0
         if self.food.is_discount:
-            total = self.food.price_discount * self.quantity
+            total = self.food.get_price_discount * self.quantity
         else:
             total = self.food.price * self.quantity
 
-            self.total_price_foods = total
+        return total
 
+    def save(self, *args, **kwargs):
+        self.total_price_foods = self.get_total_price
         return super().save(*args, **kwargs)
+
 
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=False, default=None)
@@ -33,13 +37,24 @@ class Order(models.Model):
     is_send = models.BooleanField(default=False)
     total_price_order = models.FloatField(null=True, blank=True)
 
-    def save(self, *args, **kwargs):
+    @property
+    def get_total_price(self):
         total_price_order = 0
         cart_data = self.cart.all()
 
         for food in cart_data:
-            total_price_order += food.total_price_food
+            total_price_order += food.get_total_price
 
-        self.total_price_order = total_price_order
+        return total_price_order
 
-        return super().save(*args, **kwargs)
+
+def save(self, *args, **kwargs):
+    total_price_order = 0
+    cart_data = self.cart.all()
+
+    for food in cart_data:
+        total_price_order += food.total_price_foods
+
+    self.total_price_order = self.get_total_price
+
+    return super().save(*args, **kwargs)

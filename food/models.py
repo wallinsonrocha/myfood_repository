@@ -23,18 +23,21 @@ class Food(models.Model):
     def __str__(self):
         return self.title
 
+    @property
+    def get_price_discount(self):
+        if self.is_discount:
+            price = self.price
+            discount_perc = self.discount_perc
+            percent = (1 - (discount_perc / 100))
+
+            total = (price * percent)
+
+            return total
+
     def save(self, *args, **kwargs):
         if not self.slug:
             slug = f'{slugify(self.title)}'
             self.slug = slug
-
-        if self.is_discount:
-            price = self.price
-            discount_perc = self.discount_perc
-            percent = (1-(discount_perc/100))
-
-            total = (price*percent)
-
-            self.price_discount = total
+            self.price_discount = self.get_price_discount
 
         return super().save(*args, **kwargs)
