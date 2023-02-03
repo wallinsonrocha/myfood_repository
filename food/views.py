@@ -65,6 +65,3 @@ class FoodAPIViewSet(ModelViewSet):
         return Response(
             serializer.data,
         )
-
-    def list(self, request, *args, **kwargs):
-        return super().list(request, *args, **kwargs)

@@ -58,7 +58,7 @@ class CartAPIMixin(CartTestBase):
 
 
 class CartAPI(test.APITestCase, CartAPIMixin):
-    # Anonymous User
+# Anonymous User
     def test_if_anonymous_user_cant_get_cart(self):
         self.make_cart()
         response_cart = self.client.get(self.get_cart_url_list())
@@ -102,7 +102,7 @@ class CartAPI(test.APITestCase, CartAPIMixin):
             401
         )
 
-    # Client user
+# Client user
     def test_if_client_can_get_cart(self):
         cliente = self.get_auth_data_cliente()
         self.make_cart()
@@ -134,6 +134,5 @@ class CartAPI(test.APITestCase, CartAPIMixin):
             201
         )
 
-
-
+# Gerent user
 

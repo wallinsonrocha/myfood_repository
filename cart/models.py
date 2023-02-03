@@ -36,25 +36,3 @@ class Order(models.Model):
     is_sending = models.BooleanField(default=False)
     is_send = models.BooleanField(default=False)
     total_price_order = models.FloatField(null=True, blank=True)
-
-    @property
-    def get_total_price(self):
-        total_price_order = 0
-        cart_data = self.cart.all()
-
-        for food in cart_data:
-            total_price_order += food.get_total_price
-
-        return total_price_order
-
-
-def save(self, *args, **kwargs):
-    total_price_order = 0
-    cart_data = self.cart.all()
-
-    for food in cart_data:
-        total_price_order += food.total_price_foods
-
-    self.total_price_order = self.get_total_price
-
-    return super().save(*args, **kwargs)

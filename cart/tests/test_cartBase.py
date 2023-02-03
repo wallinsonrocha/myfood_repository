@@ -61,3 +61,34 @@ class CartTestBase(FoodTestBase):
             order.cart.add(p)
 
         return order
+
+    def make_order_to_user(self, user):
+        food_data = {
+            "title": "Double Sanduiche",
+            "description": "Delicious sanduiche",
+            "price": 15
+        }
+
+        food_data2 = {
+            "title": "Double Sanduiche 2",
+            "description": "Delicious sanduiche",
+            "price": 15
+        }
+
+        cart1 = self.make_cart(food_data=food_data2)
+        cart2 = self.make_cart(food_data=food_data)
+
+        cart_data = {cart1, cart2}
+
+        order = models.Order.objects.create(
+            user=user
+        )
+
+        total_price_order = 0
+        for p in cart_data:
+            order.cart.add(p)
+            total_price_order += p.get_total_price
+
+        order.total_price_order = total_price_order
+        order.save()
+        return order

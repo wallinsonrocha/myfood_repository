@@ -23,7 +23,6 @@ class IsClient(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         if request.user.is_authenticated and request.method in CLIENT_METHODS:
             return obj.user == request.user
-
         return False
 
     def has_permission(self, request, view):

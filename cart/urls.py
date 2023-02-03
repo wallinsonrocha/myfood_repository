@@ -16,9 +16,17 @@ cart_api_router.register(
     basename='cart-api',
 )
 
+order_api_router = SimpleRouter()
+order_api_router.register(
+    'api/order',
+    views.OrderAPIViewSet,
+    basename='order-api',
+)
+
 urlpatterns = [
     path('jwt/api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('jwt/api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('jwt/api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
     path('', include(cart_api_router.urls)),
+    path('', include(order_api_router.urls)),
 ]
