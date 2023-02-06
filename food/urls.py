@@ -16,9 +16,17 @@ food_api_router.register(
     basename='food-api',
 )
 
+ctg_api_router = SimpleRouter()
+ctg_api_router.register(
+    'api/category',
+    views.CategoryAPIViewSet,
+    basename='ctg-api',
+)
+
 urlpatterns = [
     path('jwt/api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('jwt/api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('jwt/api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
     path('', include(food_api_router.urls)),
+    path('', include(ctg_api_router.urls)),
 ]
