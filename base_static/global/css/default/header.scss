@@ -1,0 +1,127 @@
+#logout{
+    color: #FF0000;
+}
+
+@media (min-width: 390px) {
+    header{
+        position: fixed;
+        width: 100%;
+    }
+
+    #container-menu-mobile{
+        background-color: #BE0000;
+        height: 3.287rem;
+
+        padding: 0 1.875rem 0 1.875rem;
+    }
+
+    #icons-search-cart{
+        width: 4.5rem;
+    }
+
+    .absolute{
+        position: absolute;
+    }
+
+    .relative{
+        position: relative;
+    }
+
+    .flex{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }    
+
+    .menu-background{
+        background-color: #F7F7F5;
+        height: 100vh;
+        width: 90%;
+    }
+
+    // Menu options
+    #menu-options{
+        padding-top: 3rem;
+
+        ul{
+            margin-left: 1.875rem;
+
+            li{
+                margin-bottom: 0.696rem;
+                list-style: none;
+                font-size: 22px;
+            }
+        }
+    }    
+
+    .selected{
+        color: #FF9900;
+    }
+
+    .menu-close{
+        transform: translateX(-100%);
+        transition: .2s;
+    }
+
+    .menu-open{
+        transition: .2s;
+        transform: translateX(0%);
+    }
+
+    // Search options
+    .none{
+        display: none;
+    }
+
+    // Cart options  
+    .cart-product{
+        background-color: #FF3D00;
+        color: #FFFFFF;
+        font-weight: bold;
+
+        margin-top: 0.875rem;
+        padding: 0 1.075rem;
+        height: 4.375rem;
+    }
+
+    .qnt-position{
+        position: absolute;
+        display: flex;
+
+        top: -0.75rem;
+        left: 0;
+
+        color: #FFFFFF;
+
+        align-items: center;
+        justify-content: center;
+        
+        border-radius: 100%;
+        background-color: #FF0000;
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+
+    .grid{
+        display: grid;
+        align-content: space-between;
+    }
+
+    #content-menu-cart{
+        height: 85%;
+    }
+
+    #price-options{
+        justify-content: center;                
+    }
+
+    #cart-menu{
+        right: 0px;
+    }
+
+    // Continuar aqui
+    #total-price{
+        // tamanho
+    }
+    
+}

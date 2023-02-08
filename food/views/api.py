@@ -1,11 +1,13 @@
-from django.shortcuts import get_object_or_404
-from rest_framework.viewsets import ModelViewSet
-from rest_framework.response import Response
+from django.shortcuts import get_object_or_404, render
 from rest_framework import status
-from users.permissions import IsGerente, IsClient
-from .models import Food, Category
-from .serializers import FoodSerializer, CategorySerializer
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.response import Response
+from rest_framework.viewsets import ModelViewSet
+
+from users.permissions import IsGerente
+
+from ..models import Category, Food
+from ..serializers import CategorySerializer, FoodSerializer
 
 
 class FoodPagination(PageNumberPagination):
