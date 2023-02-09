@@ -19,37 +19,11 @@
         </header>         
         
         <main>
-            {% comment %} {% block content %}{% endblock content %} {% endcomment %}
+            {% block content %}{% endblock content %}
         </main>
-        <footer>
-            <div>
-                <h3>Atalho</h3>
-                <ul>
-                    <li>Salados</li>
-                    <li>Bolos</li>
-                    <li>Doces</li>
-                    <li>Bebidas</li>
-                </ul>
-            </div>
-            <div>
-                <h3>Contatos</h3>
-                <ul>
-                    <li>Email</li>
-                    <li>Number</li>
-                    <li>Instagram</li>
-                    <li>Facebook</li>
-                </ul>
-            </div>
-            <div>
-                <h3>Outros</h3>
-                <ul>
-                    <li>Política de privacidade</li>
-                    <li>Termos de uso</li>
-                    <li>Política de Cookies</li>
-                </ul>
-            </div>
-            <div>copyright</div>
-        </footer>
         
+        {% include 'global/partials/footer.html' %}
+
+        <script src="{% static 'global/js/header.js' %}"></script>        
     </body>
 </html>

@@ -1,2 +1,5 @@
-@import url(default/geral.css);
 @import url(default/header.css);
+@import url(default/geral.css);
+
+@import url(default/main-content.css);
+@import url(default/footer.css);

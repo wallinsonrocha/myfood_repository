@@ -1,10 +1,7 @@
-#logout{
-    color: #FF0000;
-}
-
 @media (min-width: 390px) {
     header{
-        position: fixed;
+        position: sticky;
+        top: 0px;
         width: 100%;
     }
 
@@ -69,8 +66,48 @@
     }
 
     // Search options
-    .none{
-        display: none;
+    #search-area{
+        z-index: -1;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        height: 4.2rem;
+        width: 100%;
+        background-color: #F7F7F5;
+
+        button{
+            border: none;
+            background-color: transparent;
+            margin: 0.5rem;
+        }               
+
+        input{
+            border: none;
+            height: 100%;    
+            width: 100%;                   
+
+            margin-left: 1.54rem;
+        }
+    }
+
+    #input-search-area{
+        background-color: #FFFFFF;
+        height: 2.125rem;
+        width: 19.4rem;
+
+        border-radius: 1rem;
+    }
+
+    .search-close{
+        transform: translateY(-200%);
+        transition: .2s;
+    }
+
+    .search-open{
+        transition: .2s;
+        transform: translateY(0%);
     }
 
     // Cart options  
@@ -107,12 +144,41 @@
         align-content: space-between;
     }
 
+    .none{
+        display: none;
+    }
+
+    .cart-close{
+        transform: translateX(100%);
+        transition: .2s;
+    }
+
+    .cart-open{
+        transition: .2s;
+        transform: translateX(0%);
+    }
+
     #content-menu-cart{
         height: 85%;
     }
 
     #price-options{
-        justify-content: center;                
+        display: grid;
+
+        height: 5.60rem;
+
+        button{
+            width: 50%;
+            justify-self: center;
+            height: 2.24rem;
+
+            font-weight: bold;
+            background-color: #FF9900;
+
+            color: #F7F7F5;
+            border: none;
+            border-radius: 1.25rem;
+        }
     }
 
     #cart-menu{
@@ -121,7 +187,16 @@
 
     // Continuar aqui
     #total-price{
-        // tamanho
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        color: #F7F7F5;
+        font-weight: 500;
+
+        height: 2.25rem;        
+
+        background-color: #FF3D00;
     }
     
 }

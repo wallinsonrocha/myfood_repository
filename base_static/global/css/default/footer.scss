@@ -1,0 +1,39 @@
+footer{   
+    display: grid;
+
+    background-color: #252525;
+    color: #F5F5F5;
+
+    padding: 3.75rem 1.25rem;
+    margin-top: 6.25rem;
+    font-family: 'Inter', sans-serif;
+
+    ul{
+        margin-left: 1em;
+    }
+
+    li{
+        list-style: none;
+    }
+}
+
+@media (min-width: 390px) {
+    footer{
+        #contents{
+            display: flex;
+            flex-wrap: wrap;        
+            column-gap: 45%;
+
+            margin-bottom: 4.75rem;
+
+            div:nth-child(3){
+                margin-top: 3rem;
+            }
+        }        
+    }
+}
+
+#copyright{
+    margin: 0 auto;
+    font-size: 12px;
+}
