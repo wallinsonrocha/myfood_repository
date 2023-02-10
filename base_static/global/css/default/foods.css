@@ -1,0 +1,83 @@
+@media (min-width: 390px) {
+  .container-food {
+    margin: 1.125rem;
+  }
+}
+button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 100%;
+  height: 3.125rem;
+  width: 3.125rem;
+}
+
+#loading {
+  margin: 1em;
+}
+
+#food-category {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.buy-description {
+  display: flex;
+  gap: 0.875rem;
+}
+
+.buy-button {
+  background-color: #FF9900;
+}
+.buy-button:hover {
+  background-color: #EAA947;
+}
+.buy-button:active {
+  background-color: #CB7C07;
+}
+
+.description-button {
+  background-color: #077FC3;
+}
+.description-button:hover {
+  background-color: #29B1FE;
+}
+.description-button:active {
+  background-color: #034266;
+}
+
+.container-food {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #F7F7F5;
+  width: 17.813rem;
+  height: 20.313rem;
+  border-radius: 1.25rem;
+}
+
+.image-food {
+  display: flex;
+  padding-top: 0.5rem;
+  width: 100%;
+  height: 11.25rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.title-food {
+  width: 100%;
+  text-align: center;
+  margin: 1.125rem 0;
+}
+
+.price-and-options {
+  display: flex;
+  margin-bottom: 1em;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 1.875rem;
+}/*# sourceMappingURL=foods.css.map */

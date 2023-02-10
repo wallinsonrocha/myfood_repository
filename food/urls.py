@@ -26,6 +26,7 @@ urlpatterns = [
     # path('jwt/api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     # path('jwt/api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
     path('', views.home, name="home"),
+    path('food/', views.category_id, name="category_id"),
     path('confirmation/', views.address, name="confirmation"),
     path('', include(food_api_router.urls)),
     path('', include(ctg_api_router.urls)),

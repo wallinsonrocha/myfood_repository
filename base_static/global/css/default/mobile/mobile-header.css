@@ -28,6 +28,12 @@
     height: 100vh;
     width: 90%;
   }
+  #menu-hamburguer-mobile {
+    display: flex;
+    flex-direction: column;
+    height: 0.76rem;
+    justify-content: space-between;
+  }
   #menu-options {
     padding-top: 3rem;
   }
@@ -49,6 +55,12 @@
   .menu-open {
     transition: 0.2s;
     transform: translateX(0%);
+  }
+  .menu-bars {
+    height: 0.125rem;
+    width: 1.125rem;
+    background-color: #FFFFFF;
+    transition: 0.2s;
   }
   #search-area {
     z-index: -1;
@@ -122,6 +134,22 @@
   }
   #content-menu-cart {
     height: 85%;
+  }
+  #content-menu-cart button {
+    background-color: #FF9900;
+    border: none;
+    color: #F5F5F5;
+    font-weight: 700;
+    width: 15.5rem;
+    height: 2rem;
+    border-radius: 1.25rem;
+    margin: 1rem 0;
+  }
+  #content-menu-cart button:hover {
+    background-color: #EAA947;
+  }
+  #content-menu-cart button:active {
+    background-color: #CB7C07;
   }
   #price-options {
     display: grid;

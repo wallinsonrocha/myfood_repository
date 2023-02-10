@@ -1,0 +1,11 @@
+{% extends 'global/base.html' %}
+{% load static %}
+{% block content %}
+    <div id="food-category">
+        <span id="loading">Loading</span>        
+    </div>    
+{% endblock content %}
+
+{% block script %}
+    <script src="{% static 'global/js/foods-by-category.js' %}"></script>            
+{% endblock script %}

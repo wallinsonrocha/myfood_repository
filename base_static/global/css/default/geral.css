@@ -8,21 +8,11 @@ h1{
     font-weight: bold;
 }
 
-h3{
+h1, h2, h3, button, ul{
     font-family: 'Inter', sans-serif;
     font-weight: bold;
 }
 
-p{
-    font-family: 'Inter', sans-serif;
-    font-weight: 400;
-}
-
-button{
-    font-family: 'Inter', sans-serif;
-    font-weight: bold;
-}
-
-ul{
+span, p{
     font-family: 'Inter', sans-serif;
 }

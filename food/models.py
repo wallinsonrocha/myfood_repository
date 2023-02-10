@@ -12,7 +12,7 @@ class Category(models.Model):
 class Food(models.Model):
     title = models.CharField(max_length=65, unique=True)
     cover = models.ImageField(upload_to='food/covers/%Y/%m/%d/', null=True, default=None)
-    description = models.CharField(max_length=65)
+    description = models.TextField()
     slug = models.SlugField(unique=True, blank=True)
     price = models.FloatField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="category", default=None)

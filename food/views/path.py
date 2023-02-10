@@ -6,3 +6,6 @@ def home(request):
 
 def address(request):
     return render(request, 'food/pages/confirm_order.html')
+
+def category_id(request):
+    return render(request, 'food/pages/category_id.html')

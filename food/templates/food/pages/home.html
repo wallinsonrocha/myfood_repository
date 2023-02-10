@@ -1,4 +1,5 @@
 {% extends 'global/base.html' %}
+{% load static %}
 {% block content %}
     <div class="topic-option">
         <div class="area-image">
@@ -7,7 +8,7 @@
         <div class="area-text">
             <h1>Descontos</h1>
             <p>Aproveite os nossos descontos a partir dos 25%! O seu lanche nunca foi tão fácil. Não é mesmo?</p>
-            <button>Veja mais</button>
+            <button id="r-descontos">Veja mais</button>
         </div>
     </div>
     <div class="topic-option">
@@ -17,7 +18,7 @@
         <div class="area-text">
             <h1>Salgados</h1>
             <p>Está desejando um gostinho um pouco mais salgado? Exeperimente os nossos melhores salgados!</p>
-            <button>Veja mais</button>
+            <button id="r-salgados">Veja mais</button>
         </div>
     </div>
     <div class="topic-option">
@@ -27,7 +28,7 @@
         <div class="area-text">
             <h1>Bolos</h1>
             <p>Para festa de aniverssário, namoro e até mesmo comemoração entre amigos, o bolo não pode faltar!</p>
-            <button>Veja mais</button>
+            <button id="r-bolos">Veja mais</button>
         </div>
     </div>
     <div class="topic-option">
@@ -37,7 +38,7 @@
         <div class="area-text">
             <h1>Doces</h1>
             <p>Talvez um sabor mais doce seja o seu gosto. Aproveite os nossos doces disponíveis para você!</p>
-            <button>Veja mais</button>
+            <button id="r-doces">Veja mais</button>
         </div>
     </div>
     <div class="topic-option">
@@ -47,7 +48,11 @@
         <div class="area-text">
             <h1>Bebidas</h1>
             <p>Algo para acompanhar? Que tal uma bebida refrescante para dar um toque adicional ao seu lanche?</p>
-            <button>Veja mais</button>
+            <button id="r-bebidas">Veja mais</button>
         </div>
     </div>
 {% endblock content %}
+
+{% block script %}
+    <script type="module" src="{% static '/global/js/button-home-redirect.js' %}"></script>
+{% endblock script %}
