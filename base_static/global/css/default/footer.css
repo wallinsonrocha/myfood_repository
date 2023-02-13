@@ -13,7 +13,7 @@ footer li {
   list-style: none;
 }
 
-@media (min-width: 390px) {
+@media (min-width: 320px) {
   footer #contents {
     display: flex;
     flex-wrap: wrap;

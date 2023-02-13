@@ -1,17 +1,123 @@
 const url = window.location
 const urlToApi = `${url.origin}/api${url.pathname}${url.search}`
+const qs = (e) => document.querySelector(e)
+const createEl = (e) => document.createElement(e)
 
-// Adicionar funcionalidade para abrir descrição e opção de compra
+const infoDescBuy = qs("#infos-desc-buy")
+const principalConteiner = document.querySelector("#food-category")
+const contentBuy = document.querySelector("#content-buy")
+const contentDescription = qs("#content-description")
 
 async function apiGet(){
     let response = await fetch(urlToApi)
     let data = await response.json()
     let results = await data.results
 
-    const createEl = (e) => document.createElement(e)
-    const principalConteiner = document.querySelector("#food-category")
-
     principalConteiner.innerHTML = ""
+
+    // Buy interface
+    function openBuyOption(id){
+        qs("body").style.overflowY = "hidden";
+        let element = results.filter(e => e.id == id).shift()
+
+        contentBuy.innerHTML = ""
+
+        // Elements
+        let infoBuy = createEl("div")
+        let arrowDescExit = createEl("button")
+        let imageFood = createEl("div")
+        let image = createEl("img")
+        let infosQuantityPrice = createEl("div")
+        let title = createEl("h2")
+        let quantityAndAddCart = createEl("div")
+        let infosBuy = createEl("div")
+        let rmvQuantity = createEl("button")
+        let quantityInfoBuy = createEl("h2")
+        let addQuantity = createEl("button")
+        let addInTheCart = createEl("button")
+        let totalPriceProduct = createEl("h3")
+
+
+        // Classes
+        infoBuy.classList.add("info-buy")
+        imageFood.classList.add("image-food")
+        infosQuantityPrice.classList.add("infos-quantity-price")
+        quantityAndAddCart.classList.add("quantity-and-add-cart")
+        infosBuy.classList.add("infos-buy")
+        rmvQuantity.classList.add("rmv-quantity")
+        quantityInfoBuy.classList.add("quantity-info-buy")
+        addQuantity.classList.add("add-quantity")
+        addInTheCart.classList.add("add-in-the-cart")
+        totalPriceProduct.classList.add("total-price-product")
+
+        // Id
+        arrowDescExit.setAttribute("id", "arrow-buy-exit")
+
+        // Context
+        arrowDescExit.innerHTML = `
+        <svg width="16" height="22" viewBox="0 0 16 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13.3333 21.1027L0 10.6693L13.3333 0.23584L15.7 2.08777L4.73333 10.6693L15.7 19.2507L13.3333 21.1027Z"
+                fill="black" />
+        </svg>
+        `
+        infoBuy.appendChild(arrowDescExit)
+        image.src = element.cover
+        title.innerHTML = element.title
+        rmvQuantity.innerHTML = `
+        <svg width="12" height="4" viewBox="0 0 12 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 0V4H0V0H12Z" fill="white" />
+        </svg>                                
+        `
+        addQuantity.innerHTML = `
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6.72458 18V0H11.2754V18H6.72458ZM0 11.2754V6.72458H18V11.2754H0Z" fill="white" />
+        </svg>
+        `
+        addInTheCart.innerHTML = `
+        <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11 25.6667V14.6667H0V11H11V0H14.6667V11H25.6667V14.6667H14.6667V25.6667H11Z" fill="white"/>
+        </svg>
+        `
+        
+        // Append child
+        contentBuy.appendChild(infoBuy)
+        infoBuy.appendChild(imageFood)
+        imageFood.appendChild(image)
+        infoBuy.appendChild(infosQuantityPrice)
+        infosQuantityPrice.appendChild(title)
+        infosQuantityPrice.appendChild(quantityAndAddCart)
+        quantityAndAddCart.appendChild(infosBuy)
+        infosBuy.appendChild(rmvQuantity)
+        infosBuy.appendChild(quantityInfoBuy)
+        infosBuy.appendChild(addQuantity)
+        quantityAndAddCart.appendChild(addInTheCart)
+        infosQuantityPrice.appendChild(totalPriceProduct)       
+
+        // Events
+        arrowDescExit.addEventListener("click", () => closeWindowBuy())
+        addQuantity.addEventListener("click", () => fcAddQuantity())
+        rmvQuantity.addEventListener("click", () => fcRmvQuantity())
+
+        // Display
+        infoDescBuy.style.display = "flex"
+        contentBuy.style.display = "flex"
+        setTimeout(function(){ 
+            contentBuy.style.transform = "translateY(0)"
+        }, 1);
+
+        
+        // Functions
+        function fcAddQuantity(num){
+            num++                                
+            quantityInfoBuy.innerText = num
+        }
+
+        function fcRmvQuantity(num){
+            if(num > 1){
+                return quantityInfoBuy.innerHTML = num--
+            }    
+        }
+    }
 
     results.forEach(d => {
 
@@ -24,6 +130,8 @@ async function apiGet(){
         let informationsFood = createEl("div")
         let title = createEl("h3")
         let priceAndOptions = createEl("div")
+        let pricesDive = createEl("div")
+        let priceDiscount = createEl("span")
         let price = createEl("span")
         let buyDescription = createEl("div")
         let buyButton = createEl("button")
@@ -55,20 +163,51 @@ async function apiGet(){
         buyDescription.classList.add("buy-description")
         buyButton.classList.add("buy-button")
         descriptionButton.classList.add("description-button")
+        pricesDive.classList.add("price-divisor")
 
+        // If is discount
+        if(d.is_discount){
+            price.innerHTML = `R$ ${(d.price).toFixed(2).replace(".", ",")}`
+            price.classList.add("old-price")
+            price.appendChild(priceDiscount)
+
+            pricesDive.appendChild(price)
+            priceDiscount.innerHTML = `R$ ${(d.price_discount).toFixed(2).replace(".", ",")}`
+            pricesDive.appendChild(priceDiscount)
+        }        
+        
         // Append childs
         container.appendChild(imageContainer)
         imageContainer.appendChild(image)
         container.appendChild(informationsFood)
         informationsFood.appendChild(title)
         informationsFood.appendChild(priceAndOptions)
-        priceAndOptions.appendChild(price)
+        pricesDive.appendChild(price)
+        priceAndOptions.appendChild(pricesDive)
         priceAndOptions.appendChild(buyDescription)
         buyDescription.appendChild(buyButton)
-        buyDescription.appendChild(descriptionButton)     
+        buyDescription.appendChild(descriptionButton)    
+        
+        // Add events
+        buyButton.addEventListener("click", () =>openBuyOption(d.id))
 
         principalConteiner.appendChild(container)
     });
+
+
+    // Functions
+    function closeWindowBuy(){
+        qs("body").style.overflowY = "auto";
+    
+        contentBuy.style.transform = "translateY(200%)"
+    
+        setTimeout(function(){ 
+            contentBuy.style.display = "none"
+            infoDescBuy.style.display = "none"
+            contentDescription.style.display = "none"    
+        }, 200);
+    }
 }
+
 
 apiGet()

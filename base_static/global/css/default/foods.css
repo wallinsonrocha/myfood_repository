@@ -1,4 +1,4 @@
-@media (min-width: 390px) {
+@media (min-width: 320px) {
   .container-food {
     margin: 1.125rem;
   }
@@ -56,6 +56,7 @@ button {
   width: 17.813rem;
   height: 20.313rem;
   border-radius: 1.25rem;
+  box-shadow: 0px 0px 10px 4px rgba(0, 0, 0, 0.5);
 }
 
 .image-food {
@@ -80,4 +81,112 @@ button {
   justify-content: center;
   align-items: center;
   gap: 1.875rem;
+}
+
+.old-price {
+  font-size: 0.75rem;
+  color: #5F5F5F;
+  text-decoration: line-through;
+}
+
+.price-divisor {
+  display: flex;
+  flex-direction: column-reverse;
+  text-align: center;
+}
+
+#infos-desc-buy {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+#content-buy {
+  position: relative;
+  transform: translateY(200%);
+  transition: 0.2s;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  width: 21.25rem;
+  height: 20.313rem;
+  background-color: #F7F7F5;
+  box-shadow: 0px 0px 10px 4px rgba(0, 0, 0, 0.5);
+  border-radius: 1.25rem;
+}
+#content-buy #arrow-buy-exit {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: transparent;
+  width: auto;
+  height: auto;
+  margin-top: 1rem;
+  margin-right: 1.25rem;
+}
+#content-buy .infos-quantity-price {
+  display: flex;
+  gap: 7px;
+  flex-direction: column;
+  align-items: center;
+}
+#content-buy .quantity-and-add-cart {
+  display: flex;
+  width: 100%;
+  gap: 4.375rem;
+}
+#content-buy button {
+  background-color: #FF9900;
+}
+#content-buy .infos-buy {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+#content-buy .infos-buy button {
+  width: 2rem;
+  height: 2rem;
+}
+#content-buy .infos-buy button:nth-child(1) {
+  border-radius: 1.25rem 0 0 1.25rem;
+}
+#content-buy .infos-buy button:nth-child(3) {
+  border-radius: 0 1.25rem 1.25rem 0;
+}
+
+#content-description {
+  position: relative;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  width: 21.25rem;
+  height: 26.25rem;
+  background-color: #F7F7F5;
+  box-shadow: 0px 0px 10px 4px rgba(0, 0, 0, 0.5);
+  border-radius: 1.25rem;
+}
+#content-description #arrow-desc-exit {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: 1rem;
+  margin-right: 1.25rem;
+}
+#content-description .desc-food {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 0.75rem;
+}
+#content-description .desc-food h2 {
+  line-height: 2.375rem;
+}
+#content-description .desc-food p {
+  text-align: center;
 }/*# sourceMappingURL=foods.css.map */

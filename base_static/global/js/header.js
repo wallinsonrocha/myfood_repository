@@ -1,6 +1,9 @@
 const q = (e) => document.querySelector(e)
 const qA = (e) => document.querySelectorAll(e)
 
+// Local storage
+localStorage.setItem("cart", "{}")
+
 const menuHamburguer =  q("#menu-hamburguer-mobile").addEventListener("click", function (){
     let menuOptions = q("#menu-options")
     let cartMenu = q("#cart-menu").classList
