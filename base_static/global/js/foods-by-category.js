@@ -8,6 +8,19 @@ const principalConteiner = document.querySelector("#food-category")
 const contentBuy = document.querySelector("#content-buy")
 const contentDescription = qs("#content-description")
 
+// Função para verificar se o item já está no carrinho
+function verifyInCart(id){
+    let food = JSON.parse(localStorage.getItem("cart"))
+    let quantity = 1
+    food.forEach(f => {
+        if(f[0] == id){
+            quantity = f[1]
+            return quantity
+        }
+    })
+    return quantity
+}
+
 async function apiGet(){
     let response = await fetch(urlToApi)
     let data = await response.json()
@@ -54,15 +67,17 @@ async function apiGet(){
         arrowDescExit.setAttribute("id", "arrow-buy-exit")
 
         // Context
+        image.src = element.cover
+        title.innerHTML = element.title
+        quantityInfoBuy.innerHTML = verifyInCart(id)
+
+        // Content svg
         arrowDescExit.innerHTML = `
         <svg width="16" height="22" viewBox="0 0 16 22" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M13.3333 21.1027L0 10.6693L13.3333 0.23584L15.7 2.08777L4.73333 10.6693L15.7 19.2507L13.3333 21.1027Z"
                 fill="black" />
         </svg>
         `
-        infoBuy.appendChild(arrowDescExit)
-        image.src = element.cover
-        title.innerHTML = element.title
         rmvQuantity.innerHTML = `
         <svg width="12" height="4" viewBox="0 0 12 4" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M12 0V4H0V0H12Z" fill="white" />
@@ -82,6 +97,7 @@ async function apiGet(){
         // Append child
         contentBuy.appendChild(infoBuy)
         infoBuy.appendChild(imageFood)
+        infoBuy.appendChild(arrowDescExit)
         imageFood.appendChild(image)
         infoBuy.appendChild(infosQuantityPrice)
         infosQuantityPrice.appendChild(title)
@@ -95,8 +111,8 @@ async function apiGet(){
 
         // Events
         arrowDescExit.addEventListener("click", () => closeWindowBuy())
-        addQuantity.addEventListener("click", () => fcAddQuantity())
-        rmvQuantity.addEventListener("click", () => fcRmvQuantity())
+        addQuantity.addEventListener("click", () => fcAddQuantity(quantityInfoBuy.innerText))
+        rmvQuantity.addEventListener("click", () => fcRmvQuantity(quantityInfoBuy.innerText))
 
         // Display
         infoDescBuy.style.display = "flex"
@@ -114,13 +130,14 @@ async function apiGet(){
 
         function fcRmvQuantity(num){
             if(num > 1){
-                return quantityInfoBuy.innerHTML = num--
+                num--
+                return quantityInfoBuy.innerHTML = num
             }    
         }
     }
 
+    // Principal
     results.forEach(d => {
-
         console.log(d)
 
         // Elements
