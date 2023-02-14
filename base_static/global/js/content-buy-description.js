@@ -1,8 +1,6 @@
 const urlFood = window.location
 const urlToApiFood = `${urlFood.origin}/api/food/`
 
-// Criar interface para a descrição
-
 const q = (e) => document.querySelector(e)
 
 const contentBuy = document.querySelector("#content-buy")
@@ -10,16 +8,31 @@ const contentDescription = q("#content-description")
 const infoDescBuy = q("#infos-desc-buy")
 const createEl = (e) => document.createElement(e)
 
+
 function closeWindowBuy(){
     q("body").style.overflowY = "auto";
 
     contentBuy.style.transform = "translateY(200%)"
 
     setTimeout(function(){ 
-        contentBuy.style.display = "none"
+        infoDescBuy.style.display = "none"
+        contentBuy.style.display = "none"    
+    }, 200);
+
+    contentBuy.innerHTML = ""
+}
+
+function closeWindowDesc(){
+    q("body").style.overflowY = "auto";
+
+    contentDescription.style.transform = "translateY(200%)"
+
+    setTimeout(function(){ 
         infoDescBuy.style.display = "none"
         contentDescription.style.display = "none"    
     }, 200);
+
+    contentDescription.innerHTML = ""
 }
 
 function verifyInCart(id){
@@ -61,7 +74,6 @@ async function openBuyOption(id){
 
 
     // Classes
-    infoBuy.classList.add("info-buy")
     imageFood.classList.add("image-food")
     infosQuantityPrice.classList.add("infos-quantity-price")
     quantityAndAddCart.classList.add("quantity-and-add-cart")
@@ -128,7 +140,7 @@ async function openBuyOption(id){
     contentBuy.style.display = "flex"
     setTimeout(function(){ 
         contentBuy.style.transform = "translateY(0)"
-    }, 1);
+    }, 10);
 
     
     // Functions
@@ -145,4 +157,63 @@ async function openBuyOption(id){
     }
 }
 
-export {openBuyOption}
+async function openDescOption(id){
+    let response = await fetch(urlToApiFood)
+    let data = await response.json()
+    let results = await data.results    
+
+    q("body").style.overflowY = "hidden";
+    let element = results.filter(e => e.id == id).shift()
+
+    contentDescription.innerHTML = ""
+
+    // Elements
+    let infoDesc = createEl("div")
+    let arrowDescExit = createEl("button")
+    let imageFood = createEl("div")
+    let image = createEl("img")
+    let descFood = createEl("div")
+    let title = createEl("h2")
+    let description = createEl("p")
+
+    // Classes
+    imageFood.classList.add("image-food")
+    descFood.classList.add("desc-food")  
+
+    // Id
+    arrowDescExit.setAttribute("id", "arrow-desc-exit")
+
+    // Context
+    image.src = element.cover
+    title.innerHTML = element.title
+    description.innerHTML = element.description
+
+    // Content svg
+    arrowDescExit.innerHTML = `
+    <svg width="16" height="22" viewBox="0 0 16 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M13.3333 21.1027L0 10.6693L13.3333 0.23584L15.7 2.08777L4.73333 10.6693L15.7 19.2507L13.3333 21.1027Z"
+            fill="black" />
+    </svg>
+    `
+    
+    // Append child
+    contentDescription.appendChild(infoDesc)
+    infoDesc.appendChild(imageFood)
+    infoDesc.appendChild(arrowDescExit)
+    imageFood.appendChild(image)
+    infoDesc.appendChild(descFood)
+    descFood.appendChild(title)
+    descFood.appendChild(description)
+
+    // Events
+    arrowDescExit.addEventListener("click", () => closeWindowDesc())
+
+    // Display
+    infoDescBuy.style.display = "flex"
+    contentDescription.style.display = "flex"
+    setTimeout(function(){ 
+        contentDescription.style.transform = "translateY(0)"
+    }, 10);
+}
+
+export {openBuyOption, openDescOption}

@@ -1,4 +1,5 @@
-import { openBuyOption } from "./content-buy-description.js"
+import { openBuyOption, openDescOption } from "./content-buy-description.js"
+
 
 const url = window.location
 const urlToApi = `${url.origin}/api${url.pathname}${url.search}`
@@ -88,7 +89,9 @@ async function apiGet(){
         buyDescription.appendChild(descriptionButton)    
         
         // Add events
-        buyButton.addEventListener("click", () =>openBuyOption(d.id))
+        buyButton.addEventListener("click", () => openBuyOption(d.id))
+        descriptionButton.addEventListener("click", () => openDescOption(d.id))
+
 
         principalConteiner.appendChild(container)
     });
