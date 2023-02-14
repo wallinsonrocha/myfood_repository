@@ -132,14 +132,26 @@
         color: #FFFFFF;
         font-weight: bold;
 
-        margin-top: 0.875rem;
         padding: 0 1.075rem;
         height: 4.375rem;
+
+        margin-bottom: 0.2rem;
+
+        img{
+            max-width: 5rem;
+        }
+
+        .trash{
+            background-color: transparent;
+            height: auto;
+            width: auto;
+        }
     }
 
     .qnt-position{
         position: absolute;
         display: flex;
+        font-family: 'Inter';
 
         top: -0.75rem;
         left: 0;
@@ -176,28 +188,6 @@
 
     #content-menu-cart{
         height: 85%;
-
-        button{
-            background-color: #FF9900;
-            border: none;
-    
-            color: #F5F5F5;
-            font-weight: 700;
-    
-            width: 15.5rem;
-            height: 2rem;
-    
-            border-radius: 1.25rem;
-            margin: 1rem 0;
-    
-            &:hover{
-                background-color: #EAA947;
-            }
-    
-            &:active{
-                background-color: #CB7C07;
-            }
-        }
     }
 
     #price-options{
@@ -216,6 +206,14 @@
             color: #F7F7F5;
             border: none;
             border-radius: 1.25rem;
+    
+            &:hover{
+                background-color: #EAA947;
+            }
+    
+            &:active{
+                background-color: #CB7C07;
+            }
         }
     }
 
@@ -228,6 +226,8 @@
         display: flex;
         align-items: center;
         justify-content: center;
+
+        font-family: 'Inter';
 
         color: #F7F7F5;
         font-weight: 500;

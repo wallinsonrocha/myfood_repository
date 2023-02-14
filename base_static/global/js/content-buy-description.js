@@ -1,3 +1,5 @@
+import { productsCart } from "./cart.js"
+
 const urlFood = window.location
 const urlToApiFood = `${urlFood.origin}/api/food/`
 
@@ -35,7 +37,7 @@ function closeWindowDesc(){
     contentDescription.innerHTML = ""
 }
 
-function verifyInCart(id){
+function verifyInCartQuantity(id){
     let food = JSON.parse(localStorage.getItem("cart"))
     let quantity = 1
     food.forEach(f => {
@@ -45,6 +47,27 @@ function verifyInCart(id){
         }
     })
     return quantity
+}
+
+function fcAddCartInTheCart(id, quantity){
+    let cart = JSON.parse(localStorage.getItem("cart"))
+    let exist = false
+
+    cart.forEach(f => {
+        if(f[0] == id){
+            exist = true
+            return f[1] = quantity
+        }
+    })
+
+    if(!exist){
+        cart.push([id, quantity])
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart))
+
+    productsCart()
+    closeWindowBuy()
 }
 
 async function openBuyOption(id){
@@ -90,7 +113,8 @@ async function openBuyOption(id){
     // Context
     image.src = element.cover
     title.innerHTML = element.title
-    quantityInfoBuy.innerHTML = verifyInCart(id)
+    quantityInfoBuy.innerHTML = verifyInCartQuantity(id)
+    totalPriceProduct.innerHTML = verifyInCartTotalPrice(id)
 
     // Content svg
     arrowDescExit.innerHTML = `
@@ -134,6 +158,9 @@ async function openBuyOption(id){
     arrowDescExit.addEventListener("click", () => closeWindowBuy())
     addQuantity.addEventListener("click", () => fcAddQuantity(quantityInfoBuy.innerText))
     rmvQuantity.addEventListener("click", () => fcRmvQuantity(quantityInfoBuy.innerText))
+    addInTheCart.addEventListener("click", () => {
+        fcAddCartInTheCart(element.id, parseInt(quantityInfoBuy.innerText))
+    })
 
     // Display
     infoDescBuy.style.display = "flex"
@@ -147,13 +174,55 @@ async function openBuyOption(id){
     function fcAddQuantity(num){
         num++                                
         quantityInfoBuy.innerText = num
+
+        if(element.is_discount){
+            let totalPrice = `R$ ${(element.price_discount*num).toFixed(2).replace(".", ",")}`
+            totalPriceProduct.innerText = totalPrice            
+        } else {            
+            let totalPrice = `R$ ${(element.price*num).toFixed(2).replace(".", ",")}`
+            totalPriceProduct.innerText = totalPrice            
+        }
     }
 
     function fcRmvQuantity(num){
         if(num > 1){
             num--
-            return quantityInfoBuy.innerHTML = num
+            quantityInfoBuy.innerHTML = num
+
+            if(element.is_discount){
+                let totalPrice = `R$ ${(element.price_discount*num).toFixed(2).replace(".", ",")}`
+                totalPriceProduct.innerText = totalPrice            
+            } else {            
+                let totalPrice = `R$ ${(element.price*num).toFixed(2).replace(".", ",")}`
+                totalPriceProduct.innerText = totalPrice            
+            }
         }    
+    }
+
+    function verifyInCartTotalPrice(id){
+        let food = JSON.parse(localStorage.getItem("cart"))
+        
+        if(element.is_discount){
+            let totalPrice = `R$ ${(element.price_discount).toFixed(2).replace(".", ",")}`
+            
+            food.forEach(f => {
+                if(f[0] == id){
+                    totalPrice = `R$ ${(element.price_discount*f[1]).toFixed(2).replace(".", ",")}` 
+                    return totalPrice
+                }
+            })
+            return totalPrice
+        }
+
+        let totalPrice = `R$ ${(element.price).toFixed(2).replace(".", ",")}`
+            
+            food.forEach(f => {
+                if(f[0] == id){
+                    totalPrice = `R$ ${(element.price*f[1]).toFixed(2).replace(".", ",")}` 
+                    return totalPrice
+                }
+            })
+            return totalPrice
     }
 }
 
