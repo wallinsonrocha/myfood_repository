@@ -20,12 +20,30 @@
         
         <main>
             {% block content %}{% endblock content %}
+            <div id="infos-desc-buy">
+                <div id="content-buy"></div>
+
+                <div id="content-description">
+                    <svg id="arrow-desc-exit" width="16" height="22" viewBox="0 0 16 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13.3333 21.1027L0 10.6693L13.3333 0.23584L15.7 2.08777L4.73333 10.6693L15.7 19.2507L13.3333 21.1027Z"
+                            fill="black" />
+                    </svg>
+                    <div class="image-food">
+                        <div>Image</div>
+                    </div>
+                    <div class="desc-food">
+                        <h2>Title</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>                        
+                </div>
+            </div>
         </main>
         
         {% include 'global/partials/footer.html' %}
 
         {% block script %}{% endblock script %}
-        <script src="{% static 'global/js/header.js' %}"></script>
+        <script type="module" src="{% static 'global/js/header.js' %}"></script>
+        <script type="module" src="{% static 'global/js/content-buy-description.js' %}"></script>
         <script src="{% static 'global/js/cart.js' %}"></script>
     </body>
 </html>

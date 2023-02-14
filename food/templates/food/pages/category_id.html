@@ -1,64 +1,11 @@
 {% extends 'global/base.html' %}
 {% load static %}
 {% block content %}
-
-    <div id="infos-desc-buy">
-        <div id="content-buy">
-            <div class="info-buy">
-                <svg id="arrow-buy-exit" width="16" height="22" viewBox="0 0 16 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M13.3333 21.1027L0 10.6693L13.3333 0.23584L15.7 2.08777L4.73333 10.6693L15.7 19.2507L13.3333 21.1027Z"
-                        fill="black" />
-                </svg>
-                <div class="image-food">
-                    <div>Image</div>
-                </div>
-                <div class="infos-quantity-price">
-                    <h2>Title</h2>
-                    <div class="quantity-and-add-cart">
-                        <div class="infos-buy">
-                            <button class="rmv-quantity">
-                                <svg width="12" height="4" viewBox="0 0 12 4" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M12 0V4H0V0H12Z" fill="white" />
-                                </svg>                                
-                            </button>
-                            <h2 class="quantity-info-buy">2</h2>
-                            <button class="add-quantity">
-                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M6.72458 18V0H11.2754V18H6.72458ZM0 11.2754V6.72458H18V11.2754H0Z" fill="white" />
-                                </svg>
-                            </button>
-                        </div>
-                        <button class="add-in-the-cart">
-                            <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M11 25.6667V14.6667H0V11H11V0H14.6667V11H25.6667V14.6667H14.6667V25.6667H11Z" fill="white"/>
-                            </svg>
-                        </button>
-                    </div>
-                    <h3 class="total-price-product">Price</h3>
-                </div>
-            </div>
-        </div>
-
-        <div id="content-description">
-            <svg id="arrow-desc-exit" width="16" height="22" viewBox="0 0 16 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M13.3333 21.1027L0 10.6693L13.3333 0.23584L15.7 2.08777L4.73333 10.6693L15.7 19.2507L13.3333 21.1027Z"
-                    fill="black" />
-            </svg>
-            <div class="image-food">
-                <div>Image</div>
-            </div>
-            <div class="desc-food">
-                <h2>Title</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>                        
-        </div>
-    </div>
-
     <div id="food-category">
         <span id="loading">Loading</span>        
     </div>    
 {% endblock content %}
 
 {% block script %}
-    <script src="{% static 'global/js/foods-by-category.js' %}"></script>            
+    <script type="module" src="{% static 'global/js/foods-by-category.js' %}"></script>            
 {% endblock script %}
