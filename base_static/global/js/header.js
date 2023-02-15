@@ -1,3 +1,5 @@
+import { verifyLogin } from "./verify-login.js"
+
 const q = (e) => document.querySelector(e)
 const qA = (e) => document.querySelectorAll(e)
 
@@ -42,7 +44,7 @@ const menuHamburguer =  q("#menu-hamburguer-mobile").addEventListener("click", f
 
         menuBars[1].style.width = "1.125rem"
         menuBars[2].style.width = "1.125rem"
-    } 
+    }     
 })
 
 const cartMenu = q("#cart").addEventListener("click", function (){

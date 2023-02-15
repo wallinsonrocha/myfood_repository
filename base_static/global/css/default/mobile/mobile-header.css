@@ -23,6 +23,12 @@
     align-items: center;
     justify-content: space-between;
   }
+  .flex-image-name {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
   .menu-background {
     background-color: #F7F7F5;
     height: 100vh;

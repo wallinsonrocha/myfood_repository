@@ -2,6 +2,10 @@
   .container-food {
     margin: 1.125rem;
   }
+  #name-category {
+    width: 100%;
+    text-align: center;
+  }
 }
 button {
   display: flex;

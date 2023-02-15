@@ -1,6 +1,5 @@
 import { openBuyOption, openDescOption } from "./content-buy-description.js"
 
-
 const url = window.location
 const urlToApi = `${url.origin}/api${url.pathname}${url.search}`
 const qs = (e) => document.querySelector(e)
@@ -11,6 +10,14 @@ const principalConteiner = document.querySelector("#food-category")
 const contentBuy = document.querySelector("#content-buy")
 const contentDescription = qs("#content-description")
 
+async function nameCategory(category_id){
+    const urlToCategory = `${url.origin}/api/category/${category_id}`
+    let response = await fetch(urlToCategory)
+    let data = await response.json()
+
+    qs("#name-category").innerHTML = `<h1>${data.name}</h1>`
+}
+
 
 async function apiGet(){
     let response = await fetch(urlToApi)
@@ -19,10 +26,10 @@ async function apiGet(){
 
     principalConteiner.innerHTML = ""
 
+    nameCategory(results[0].category)
+    
     
     results.forEach(d => {
-        console.log(d)
-
         // Elements
         let container = createEl("div")
         let imageContainer = createEl("div")

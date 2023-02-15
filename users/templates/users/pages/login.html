@@ -1,0 +1,20 @@
+{% extends 'global/base.html' %}
+{% load static %}
+
+{% block content %}
+<img id="logo-mobile" src="../media/food/utils/Logo-mobile.png" alt="logo-mobile">
+<div id="login-container">
+    <form id="login">
+        <input placeholder="Usuário" id="login-username" type="text" required>
+        <input placeholder="Senha" id="login-password" type="password" required>
+        <button type="submit">Login</button>
+    </form>
+    <p>Não tem uma conta? <a href="">Clique aqui!</a></p>
+    <p class="copyright">© My Food ltda. Todos os direitos reservados.</p>
+</div>
+{% endblock content %}
+
+{% block script %}
+<script src="{% static 'global/js/submit.js' %}"></script>
+
+{% endblock script %}

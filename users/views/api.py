@@ -1,8 +1,13 @@
 from datetime import timedelta
 
-from rest_framework_simplejwt.views import TokenRefreshView, TokenObtainPairView
-from rest_framework_simplejwt.serializers import TokenRefreshSerializer
+from django.http import JsonResponse
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.views import APIView
 from rest_framework_simplejwt.exceptions import InvalidToken
+from rest_framework_simplejwt.serializers import TokenRefreshSerializer
+from rest_framework_simplejwt.views import (TokenObtainPairView,
+                                            TokenRefreshView)
+
 
 class CookieTokenRefreshSerializer(TokenRefreshSerializer):
     refresh = None
@@ -29,3 +34,10 @@ class CookieTokenRefreshView(TokenRefreshView):
             del response.data['refresh']
         return super().finalize_response(request, response, *args, **kwargs)
     serializer_class = CookieTokenRefreshSerializer
+
+class LogoutView(APIView):
+    def post(self, request):
+        response = JsonResponse({"message": "Logout realizado com sucesso."})
+        response.delete_cookie('refresh_token')
+        return response
+

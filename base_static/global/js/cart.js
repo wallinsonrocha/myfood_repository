@@ -10,6 +10,19 @@ if(!localStorage.getItem("cart")){
     localStorage.setItem("cart", "[]")
 }
 
+function deleteOption(id){
+    let cart = JSON.parse(localStorage.getItem("cart"))
+    
+    cart.forEach((f, i) => {
+        if(f[0] == id){
+            cart.splice(i, 1)
+        }
+    })
+
+    localStorage.setItem("cart", JSON.stringify(cart))
+    productsCart()
+}
+
 async function productsCart(){
     let response = await fetch(urlToApiFoodToCart)
     let data = await response.json()
@@ -28,6 +41,7 @@ async function productsCart(){
         // Elements
         let product = createElToCart("div")
         let quantity = createElToCart("div")
+        let imageName = createElToCart("div")
         let image = createElToCart("img")
         let name = createElToCart("span")
         let trash = createElToCart("button")
@@ -36,12 +50,14 @@ async function productsCart(){
         product.classList.add("flex")
         product.classList.add("cart-product")
         product.classList.add("relative")
+        imageName.classList.add("flex-image-name")
         quantity.classList.add("qnt-position")
         trash.classList.add("trash")
 
         // Append
-        product.appendChild(image)
-        product.appendChild(name)
+        imageName.appendChild(image)
+        imageName.appendChild(name)
+        product.appendChild(imageName)
         product.appendChild(trash)
 
         if(p[1] > 1){
@@ -61,7 +77,8 @@ async function productsCart(){
         `         
 
         // Events
-        name.addEventListener("click", () => openBuyOption(p[0]))
+        imageName.addEventListener("click", () => openBuyOption(p[0]))
+        trash.addEventListener("click", () => deleteOption(p[0]))
         
         qsCart.appendChild(product)
     });

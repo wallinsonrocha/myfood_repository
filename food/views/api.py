@@ -11,7 +11,7 @@ from ..serializers import CategorySerializer, FoodSerializer
 
 
 class FoodPagination(PageNumberPagination):
-    page_size = 10
+    page_size = 100
 
 class FoodAPIViewSet(ModelViewSet):
     queryset = Food.objects.get_queryset().order_by('id')
