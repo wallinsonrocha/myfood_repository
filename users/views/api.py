@@ -36,6 +36,7 @@ class CookieTokenRefreshView(TokenRefreshView):
     serializer_class = CookieTokenRefreshSerializer
 
 class LogoutView(APIView):
+    permission_classes = [IsAuthenticated]
     def post(self, request):
         response = JsonResponse({"message": "Logout realizado com sucesso."})
         response.delete_cookie('refresh_token')

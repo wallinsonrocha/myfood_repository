@@ -8,12 +8,14 @@ const creatEle = (e) => document.createElement(e)
 
 
 async function logoutUser(){
+    let tokenAccess = localStorage.getItem("access")
+
     let optionsLogout = {
         method: 'POST',
         headers: { 
-            // 'Authorization': `Bearer ${tokenAccess}`,
-            'Content-Type': 'application/json'
-        },
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer '+tokenAccess,
+        }
     }
 
     fetch(urlToLogout, optionsLogout)
@@ -29,7 +31,9 @@ async function logoutUser(){
 async function refreshToken(){
     let optionsRefres = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' }
+        headers: {
+            'Content-Type': 'application/json',
+        }
     }
 
     return fetch(urlToRefresh, optionsRefres)
