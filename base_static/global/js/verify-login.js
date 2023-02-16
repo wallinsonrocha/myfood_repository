@@ -20,7 +20,6 @@ async function logoutUser(){
 
     fetch(urlToLogout, optionsLogout)
     .then((a) => {
-        console.log(a)
         localStorage.removeItem("access")
     })            
     .then(()=>{
@@ -73,6 +72,7 @@ async function verifyLogin(){
     })
 }
 
+// Para habilitar o logout
 (() => {
     let token = localStorage.getItem("access")
     if(token){
@@ -88,6 +88,15 @@ async function verifyLogin(){
                 menu.appendChild(logout)            
             }
         })
+    } else{
+        let menu = qS("#menu-options ul") 
+        let login = creatEle("li")
+        let a = creatEle("a")
+        a.href = "/login"
+        login.appendChild(a)
+        a.innerText = "Login"
+        menu.appendChild(login)            
+
     }
 })()
 

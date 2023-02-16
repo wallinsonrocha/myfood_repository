@@ -1,7 +1,7 @@
-from django.db import models
 from django.contrib.auth.models import User
-from food.models import Food
+from django.db import models
 
+from food.models import Food
 
 # Create your models here.
 
@@ -36,3 +36,4 @@ class Order(models.Model):
     is_sending = models.BooleanField(default=False)
     is_send = models.BooleanField(default=False)
     total_price_order = models.FloatField(null=True, blank=True)
+        

@@ -51,9 +51,6 @@
     list-style: none;
     font-size: 22px;
   }
-  .selected {
-    color: #FF9900;
-  }
   .menu-close {
     transform: translateX(-100%);
     transition: 0.2s;

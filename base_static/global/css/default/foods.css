@@ -17,6 +17,11 @@ button {
   width: 3.125rem;
 }
 
+#message-error {
+  color: #FF0000;
+  font-size: 12px;
+}
+
 #loading {
   margin: 1em;
 }

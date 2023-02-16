@@ -35,6 +35,21 @@ class CartAPIViewSet(ModelViewSet):
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
+
+        food_id = serializer.validated_data.get('food').id
+        quantity_food = serializer.validated_data.get('quantity')
+        cart_item = Cart.objects.filter(food=food_id, quantity=quantity_food).first()
+        has_cart_item = cart_item is not None
+        
+        # Verify if object exists
+        if has_cart_item:
+            cart = Cart.objects.get(food=food_id, quantity=quantity_food)
+            cart_id = cart.id
+            return Response(
+            {"cart_id": cart_id},
+            status=status.HTTP_200_OK,
+        )     
+
         serializer.save()
         headers = self.get_success_headers(serializer.data)
         return Response(
@@ -90,3 +105,21 @@ class OrderAPIViewSet(ModelViewSet):
         if page is not None:
             serializer = self.get_serializer(page, many=True)
             return self.get_paginated_response(serializer.data)
+        
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        carts = serializer.validated_data.get('cart')
+
+        # Sum total price
+        total_price = 0
+        for cart in carts:
+            total_price += cart.total_price_foods
+
+        serializer.save(user_id=request.user.id, total_price_order=total_price)
+        headers = self.get_success_headers(serializer.data)
+        return Response(
+            serializer.data,
+            status=status.HTTP_201_CREATED,
+            headers=headers
+        )

@@ -66,10 +66,6 @@
         }
     }    
 
-    .selected{
-        color: #FF9900;
-    }
-
     .menu-close{
         transform: translateX(-100%);
         transition: .2s;
@@ -228,7 +224,6 @@
         right: 0px;
     }
 
-    // Continuar aqui
     #total-price{
         display: flex;
         align-items: center;

@@ -1,3 +1,5 @@
+import { verifyLogin } from "./verify-login.js"
+
 const url = window.location
 const urlToSubmit = `${url.origin}/auth/token/`
 
@@ -5,6 +7,7 @@ const qS = (e) => document.querySelector(e)
 const form = qS("#login")
 const loginUsername = qS("#login-username")
 const loginPassword = qS("#login-password")
+
 
 form.addEventListener('submit', (e) => {
     e.preventDefault()
@@ -28,8 +31,23 @@ form.addEventListener('submit', (e) => {
                 localStorage.setItem("access", access)
             })
             .then(()=>{                
-                window.location.replace(url.origin)                
+                window.location.replace(url.origin)
+            })
+        } else {
+            response.json()
+            .then(() => {
+                let messageError = document.createElement("p")
+                messageError.innerText = "Usuário ou senha incorreta!"
+                messageError.setAttribute("id", "message-error")
+                form.appendChild(messageError)
             })
         }
     })   
 })
+
+if(localStorage.getItem("access")){
+    verifyLogin()
+    .then(res => {
+        res ? window.location.replace(url.origin) : null    
+    })
+}

@@ -152,8 +152,9 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
+    # Resta construir as funções para criar as ordens e o template de Ultimos pedidos.
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=14),
     'BLACKLIST_AFTER_ROTATION': False,
     'SIGNING_KEY': 'SECRET_KEY',
     'AUTH_HEADER_TYPES': ('Bearer',),

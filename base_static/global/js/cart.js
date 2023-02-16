@@ -1,4 +1,7 @@
 import { openBuyOption } from "./content-buy-description.js"
+import { verifyLogin } from "./verify-login.js"
+
+const qS = (e) => document.querySelector(e)
 
 const urlFoodToCart = window.location
 const urlToApiFoodToCart = `${urlFoodToCart.origin}/api/food/`
@@ -86,6 +89,19 @@ async function productsCart(){
     totalPriceEle.innerHTML = `R$ ${(totalPrice).toFixed(2).replace(".", ",")}`
 }  
 
-productsCart()
+qS("#finalizar-pedido").addEventListener('click', ()=>{
+    if(localStorage.getItem("access")){
+        verifyLogin()
+        .then(resp=>{
+            if(resp){
 
+            }
+        })
+    } else {
+        window.location.replace(urlFoodToCart.origin+'/login')
+    }
+})
+
+
+productsCart()
 export {productsCart}

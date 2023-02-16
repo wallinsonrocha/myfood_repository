@@ -25,9 +25,13 @@ class Food(models.Model):
 
     @property
     def get_price_discount(self):
+        if(isinstance(self.discount_perc, int)):
+            discount_perc = self.discount_perc
+        else:
+            discount_perc = 0
         if self.is_discount:
             price = self.price
-            discount_perc = self.discount_perc
+            
             percent = (1 - (discount_perc / 100))
 
             total = (price * percent)

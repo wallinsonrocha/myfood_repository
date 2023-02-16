@@ -18,7 +18,7 @@
         <div class="area-text">
             <h1>Salgados</h1>
             <p>Está desejando um gostinho um pouco mais salgado? Exeperimente os nossos melhores salgados!</p>
-            <button id="r-salgados">Veja mais</button>
+            <a href="/food/?category_id=1"><button id="r-salgados">Veja mais</button></a>
         </div>
     </div>
     <div class="topic-option">
@@ -28,7 +28,7 @@
         <div class="area-text">
             <h1>Bolos</h1>
             <p>Para festa de aniverssário, namoro e até mesmo comemoração entre amigos, o bolo não pode faltar!</p>
-            <button id="r-bolos">Veja mais</button>
+            <a href="/food/?category_id=3"><button id="r-bolos">Veja mais</button></a>
         </div>
     </div>
     <div class="topic-option">
@@ -38,7 +38,7 @@
         <div class="area-text">
             <h1>Doces</h1>
             <p>Talvez um sabor mais doce seja o seu gosto. Aproveite os nossos doces disponíveis para você!</p>
-            <button id="r-doces">Veja mais</button>
+            <a href="/food/?category_id=2"><button id="r-doces">Veja mais</button></a>
         </div>
     </div>
     <div class="topic-option">
@@ -48,11 +48,7 @@
         <div class="area-text">
             <h1>Bebidas</h1>
             <p>Algo para acompanhar? Que tal uma bebida refrescante para dar um toque adicional ao seu lanche?</p>
-            <button id="r-bebidas">Veja mais</button>
+            <a href="/food/?category_id=4"><button id="r-bebidas">Veja mais</button></a>
         </div>
     </div>
 {% endblock content %}
-
-{% block script %}
-    <script type="module" src="{% static '/global/js/button-home-redirect.js' %}"></script>
-{% endblock script %}

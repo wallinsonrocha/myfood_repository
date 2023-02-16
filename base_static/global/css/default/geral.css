@@ -10,9 +10,24 @@ h1{
 
 h1, h2, h3, button, ul{
     font-family: 'Inter', sans-serif;
+}
+
+button{
     font-weight: bold;
 }
 
 span, p{
     font-family: 'Inter', sans-serif;
+}
+
+a{
+    text-decoration: none;
+}
+
+a:visited{ 
+    color: #000;
+}
+
+.selected a{
+    color: #FF9900;
 }

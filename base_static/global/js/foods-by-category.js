@@ -3,6 +3,7 @@ import { openBuyOption, openDescOption } from "./content-buy-description.js"
 const url = window.location
 const urlToApi = `${url.origin}/api${url.pathname}${url.search}`
 const qs = (e) => document.querySelector(e)
+const qA = (e) => document.querySelectorAll(e)
 const createEl = (e) => document.createElement(e)
 
 const infoDescBuy = qs("#infos-desc-buy")
@@ -16,6 +17,13 @@ async function nameCategory(category_id){
     let data = await response.json()
 
     qs("#name-category").innerHTML = `<h1>${data.name}</h1>`
+
+    let optionMenu = qA("#menu-options li")
+    optionMenu.forEach(li => {
+        if(li.innerText == data.name){
+            li.classList.add("selected")
+        }        
+    });
 }
 
 
