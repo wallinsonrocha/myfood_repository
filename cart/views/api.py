@@ -46,7 +46,7 @@ class CartAPIViewSet(ModelViewSet):
             cart = Cart.objects.get(food=food_id, quantity=quantity_food)
             cart_id = cart.id
             return Response(
-            {"cart_id": cart_id},
+            {"id": cart_id},
             status=status.HTTP_200_OK,
         )     
 
@@ -119,7 +119,7 @@ class OrderAPIViewSet(ModelViewSet):
         serializer.save(user_id=request.user.id, total_price_order=total_price)
         headers = self.get_success_headers(serializer.data)
         return Response(
-            serializer.data,
+            # serializer.data,
             status=status.HTTP_201_CREATED,
             headers=headers
         )

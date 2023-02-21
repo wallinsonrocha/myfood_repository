@@ -153,6 +153,7 @@ REST_FRAMEWORK = {
 
 SIMPLE_JWT = {
     # Resta construir as funções para criar as ordens e o template de Ultimos pedidos.
+    # Dica: devo usar o post de cart, coletar o id e usá-lo no POST
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=14),
     'BLACKLIST_AFTER_ROTATION': False,

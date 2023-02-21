@@ -4,11 +4,10 @@
 }
 
 h1{
-    font-family: 'Inter', sans-serif;
     font-weight: bold;
 }
 
-h1, h2, h3, button, ul{
+h1, h2, h3, h5, button, ul{
     font-family: 'Inter', sans-serif;
 }
 

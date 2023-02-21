@@ -1,4 +1,4 @@
-import { verifyLogin } from "./verify-login.js"
+import { handleUserVerify } from "./verify-login.js"
 
 const url = window.location
 const urlToSubmit = `${url.origin}/auth/token/`
@@ -45,8 +45,9 @@ form.addEventListener('submit', (e) => {
     })   
 })
 
-if(localStorage.getItem("access")){
-    verifyLogin()
+if(localStorage.getItem("access")
+){
+    handleUserVerify()
     .then(res => {
         res ? window.location.replace(url.origin) : null    
     })

@@ -1,5 +1,6 @@
 import { openBuyOption } from "./content-buy-description.js"
-import { verifyLogin } from "./verify-login.js"
+import { handleUserVerify } from "./verify-login.js"
+import { buyProducts } from "./post-order.js"
 
 const qS = (e) => document.querySelector(e)
 
@@ -90,11 +91,15 @@ async function productsCart(){
 }  
 
 qS("#finalizar-pedido").addEventListener('click', ()=>{
-    if(localStorage.getItem("access")){
-        verifyLogin()
-        .then(resp=>{
-            if(resp){
+    let cart = JSON.parse(localStorage.getItem("cart"))
 
+    if(localStorage.getItem("access")){
+        handleUserVerify()
+        .then(resp=>{
+            if(resp){                
+                if(cart.length > 0){
+                    buyProducts()
+                }                    
             }
         })
     } else {

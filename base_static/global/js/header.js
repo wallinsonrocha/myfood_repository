@@ -1,4 +1,4 @@
-import { verifyLogin } from "./verify-login.js"
+import { handleUserVerify } from "./verify-login.js"
 
 const q = (e) => document.querySelector(e)
 const qA = (e) => document.querySelectorAll(e)
