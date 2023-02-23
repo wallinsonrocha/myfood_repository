@@ -1,12 +1,78 @@
 import { handleUserVerify } from "./verify-login.js"
+
+// Geral variables
 const url = window.location
 const urlToOrder = `${url.origin}/api${url.pathname}${url.search}`
 
 const qS = (e) => document.querySelector(e)
+const qA = (e) => document.querySelectorAll(e)
 const createEl = (e) => document.createElement(e)
 const allOrders = qS("#all-order")
 
-function createHeaderInfo(date, isConfirmed, isSend, isSending, totalPriceOrder) {
+const token = localStorage.getItem("access")
+let options = {
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token,
+    },
+}
+
+// Selected
+let optionMenu = qA("#menu-options li")
+    optionMenu[1].classList.add("selected")
+
+// Function to create interface to foods. It recive a array
+async function createInterfaceFoods(cartArray){
+    let cartFoodOrder = createEl("div")
+    cartFoodOrder.classList.add("foods-cart-order")
+
+    cartArray.forEach(async cart => {
+        const urlToCart = `${url.origin}/api/cart/${cart}`
+        
+        let responseCart = await fetch(urlToCart, options)
+        let resultsCart = await responseCart.json()
+
+        const urlToFood = `${url.origin}/api/food/${resultsCart.food}`
+
+        let responseFood = await fetch(urlToFood, options)
+        let resultsFood = await responseFood.json()
+
+        // Elements
+        let product = createEl("div")
+        let quantity = createEl("div")
+        let imageName = createEl("div")
+        let image = createEl("img")
+        let name = createEl("span")
+
+        // Classes
+        product.classList.add("flex")
+        product.classList.add("cart-product")
+        product.classList.add("relative")
+        imageName.classList.add("flex-image-name")
+        quantity.classList.add("qnt-position")
+
+        // Append
+        imageName.appendChild(image)
+        imageName.appendChild(name)
+        product.appendChild(imageName)
+
+        if(resultsCart.quantity > 1){
+            product.appendChild(quantity)
+        }
+
+        // Content
+        image.src = resultsFood.cover
+        name.innerText = resultsFood.title
+        quantity.innerText = resultsCart.quantity
+
+        cartFoodOrder.appendChild(product)
+    })
+
+    return cartFoodOrder
+}
+
+async function createHeaderInfo(date, isConfirmed, isSend, isSending, totalPriceOrder, cart) {
     const inProcess = (!isConfirmed && !isSending && !isSend)
     const inPreparation = (isConfirmed && !isSending && !isSend)
     const sending = (isConfirmed && isSending && !isSend)
@@ -90,38 +156,33 @@ function createHeaderInfo(date, isConfirmed, isSend, isSending, totalPriceOrder)
     preparation.appendChild(h5)
     preparation.appendChild(spanIcon)
 
+    const foodsInOrder = await createInterfaceFoods(cart)
+
+    order.appendChild(foodsInOrder)
     allOrders.appendChild(order)
 }
 
+// Principal function
 async function orderClients() {
     handleUserVerify()
         .then(async resp => {
-            if (resp) {
-                const token = localStorage.getItem("access")
-                let options = {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + token,
-                    },
-                }
+            if (resp) {             
+                let responseOrder = await fetch(urlToOrder, options)
+                let dataOrder = await responseOrder.json()
+                let resultsOrder = await dataOrder.results
 
-                let response = await fetch(urlToOrder, options)
-                let data = await response.json()
-                let results = await data.results
+                console.log(dataOrder)
 
-                results.forEach(ele => {
+                resultsOrder.forEach(ele => {
                     let dateApi = ele.date_order.substring(0, 10)
                     let date = {
                         year: dateApi.substring(0, 4),
                         month: dateApi.substring(5, 7),
                         day: dateApi.substring(8),
-                    }
+                    }              
 
-                    // Criar a interface para mostrar as comidas compradas
-                    console.log(ele)
-
-                    createHeaderInfo(date, ele.is_confirmed, ele.is_send, ele.is_sending, ele.total_price_order)
+                    createHeaderInfo(date, ele.is_confirmed, ele.is_send, ele.is_sending, 
+                        ele.total_price_order, ele.cart)
                 });
 
             }

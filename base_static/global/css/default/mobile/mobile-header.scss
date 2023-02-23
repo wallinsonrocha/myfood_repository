@@ -35,6 +35,10 @@
         align-items: center;
         justify-content: space-between;
         gap: 0.5rem;
+
+        img{
+            max-height: 62px;
+        }
     }
 
     .menu-background{
@@ -131,7 +135,7 @@
 
     // Cart options  
     .cart-product{
-        background-color: #FF3D00;
+        background-color: #C72400;
         color: #FFFFFF;
         font-weight: bold;
 

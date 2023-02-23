@@ -30,12 +30,23 @@ async function nameCategory(category_id){
 async function apiGet(){
     let response = await fetch(urlToApi)
     let data = await response.json()
-    let results = await data.results
+    let results = await data.results    
 
     principalConteiner.innerHTML = ""
 
-    nameCategory(results[0].category)
-    
+    if(window.location.search.includes("category")){
+        nameCategory(results[0].category)
+    }     
+    else if(window.location.search.includes("search")){
+        qs("#name-category").innerHTML = ""
+    }
+    else {
+       qs("#name-category").innerHTML = `<h1>Desconto</h1>`
+    }
+
+    if(response.status==404){
+        qs("#name-category").innerHTML = "<h1>Sinto muito. Sua pesquisa não foi encontrada :(</h1>"
+    }
     
     results.forEach(d => {
         // Elements

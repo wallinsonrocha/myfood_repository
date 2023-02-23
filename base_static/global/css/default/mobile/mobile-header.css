@@ -29,6 +29,9 @@
     justify-content: space-between;
     gap: 0.5rem;
   }
+  .flex-image-name img {
+    max-height: 62px;
+  }
   .menu-background {
     background-color: #F7F7F5;
     height: 100vh;
@@ -100,7 +103,7 @@
     transform: translateY(0%);
   }
   .cart-product {
-    background-color: #FF3D00;
+    background-color: #C72400;
     color: #FFFFFF;
     font-weight: bold;
     padding: 0 1.075rem;

@@ -1,3 +1,5 @@
+from django.db.models import Q
+from django.http import Http404
 from django.shortcuts import get_object_or_404, render
 from rest_framework import status
 from rest_framework.pagination import PageNumberPagination
@@ -11,7 +13,7 @@ from ..serializers import CategorySerializer, FoodSerializer
 
 
 class FoodPagination(PageNumberPagination):
-    page_size = 100
+    page_size = 10
 
 class FoodAPIViewSet(ModelViewSet):
     queryset = Food.objects.get_queryset().order_by('id')
@@ -23,9 +25,20 @@ class FoodAPIViewSet(ModelViewSet):
     def get_queryset(self):
         qs = super().get_queryset()
         category_id = self.request.query_params.get('category_id', '')
+        is_discount = self.request.query_params.get('is_discount','')
+        search_term = self.request.query_params.get('search')
 
         if category_id != '' and category_id.isnumeric():
             qs = qs.filter(category_id=category_id)
+
+        elif is_discount != '' and is_discount.lower() == 'true':
+            qs = qs.filter(is_discount=True)
+
+        elif search_term != '' and search_term:
+            qs = qs.filter(Q(slug__icontains=search_term))
+
+            if not qs.exists():
+                raise Http404('Não foram encontrados resultados para a pesquisa.')
 
         return qs
 

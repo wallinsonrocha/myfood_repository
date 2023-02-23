@@ -19,6 +19,7 @@ async function handleUserVerify(){
     } else {
         const refreshed = await refreshAccessToken()
         if (refreshed) {
+            location.reload()
             return true
         } else {
             return false
@@ -57,7 +58,7 @@ async function verifyToken(token) {
     const response = await fetch(urls.verify, options)
 
     if(response.status === 401){
-        location.reload()
+        // location.reload()
     }
 
     return response.status === 200

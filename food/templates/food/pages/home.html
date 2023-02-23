@@ -1,6 +1,7 @@
 {% extends 'global/base.html' %}
 {% load static %}
 {% block content %}
+<div id="background-home">
     <div class="topic-option">
         <div class="area-image">
             <img src="media/food/utils/descont-image.png" alt="Imagem do 25%">
@@ -8,7 +9,7 @@
         <div class="area-text">
             <h1>Descontos</h1>
             <p>Aproveite os nossos descontos a partir dos 25%! O seu lanche nunca foi tão fácil. Não é mesmo?</p>
-            <button id="r-descontos">Veja mais</button>
+            <a href="/food/?is_discount=true"><button id="r-descontos">Veja mais</button></a>
         </div>
     </div>
     <div class="topic-option">
@@ -51,4 +52,5 @@
             <a href="/food/?category_id=4"><button id="r-bebidas">Veja mais</button></a>
         </div>
     </div>
+</div>
 {% endblock content %}

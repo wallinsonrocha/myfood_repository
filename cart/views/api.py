@@ -28,8 +28,6 @@ class CartAPIViewSet(ModelViewSet):
             pk=pk,
         )
 
-        self.check_object_permissions(self.request, obj)
-
         return obj
 
     def create(self, request, *args, **kwargs):
@@ -66,7 +64,7 @@ class CartAPIViewSet(ModelViewSet):
 
 
 class OrderAPIViewSet(ModelViewSet):
-    queryset = Order.objects.get_queryset().order_by('id')
+    queryset = Order.objects.get_queryset().order_by('-id')
     serializer_class = OrderSerializer
     pagination_class = PageNumberPagination
     permission_classes = [IsAuthenticated]
@@ -92,8 +90,8 @@ class OrderAPIViewSet(ModelViewSet):
 
     def list(self, request, *args, **kwargs):
         list_user = Order.objects.get_queryset().\
-            filter(user=request.user).order_by('id')
-        list_admin = Order.objects.get_queryset().order_by('id')
+            filter(user=request.user).order_by('-id')
+        list_admin = Order.objects.get_queryset().order_by('-id')
 
         if has_role(request.user, 'gerente'):
             page = self.paginate_queryset(list_admin)

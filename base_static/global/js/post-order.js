@@ -21,6 +21,7 @@ async function postOrder(cartIds){
     fetch(urlToOrder, options)
     .then(() => {
         localStorage.setItem("cart", "[]")
+        window.location.href = "/order/?page=1"
     })
 }
 
@@ -53,7 +54,7 @@ async function buyProducts() {
     
     cartIds.forEach(e => cartToOrder.push(e.id))
 
-    postOrder(cartToOrder)    
+    postOrder(cartToOrder)  
   }
 
 
