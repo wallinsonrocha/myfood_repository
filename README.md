@@ -26,5 +26,3 @@ Para que aa plicação possa ser testada, é importante seguir as recomendaçõe
 2 - /auth/token/refresh/ -> Atualizar token de acesso
 3 - /auth/token/verify/ -> Verificar token de acesso
 4 - /logout/ 
-
-Projeto INCOMPLETO
